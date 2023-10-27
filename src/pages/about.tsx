@@ -65,7 +65,7 @@ const skills = [
   { name: "ORMs", stack: ["Prisma", "TypeORM"], years: "Two" },
   { name: "GraphQL", stack: ["TypeGraphQL", "GraphQLCodegen"], years: "Two" },
   {
-    name: "Authentication",
+    name: "Auth",
     stack: ["Sessions", "JWT", "NextAuth"],
     years: "Two",
   },
@@ -96,11 +96,8 @@ const About: NextPage = ({}) => {
       <Head>
         <title>Saivamsi Addagada | About</title>
       </Head>
-      <main
-        style={{ perspective: "1080px" }}
-        className="relative z-10 flex flex-1 flex-col overflow-hidden px-8 pb-8 pt-16"
-      >
-        <h1 className="h1 mb-8 text-8xl">
+      <main className="relative z-10 flex flex-1 flex-col overflow-hidden px-4 pb-4 pt-6 lg:px-8 lg:pb-8 lg:pt-16">
+        <h1 className="h1 mb-8 text-6xl lg:text-8xl">
           My&nbsp;
           <button
             onClick={() => setShuffle(true)}
@@ -148,7 +145,7 @@ const About: NextPage = ({}) => {
             <>
               <div className="relative grid grid-cols-4 overflow-hidden pb-2">
                 <p>(Name)</p>
-                <p>(Stack)</p>
+                <p className="col-span-2 lg:col-span-1">(Stack)</p>
                 <p>(Years)</p>
                 <Separator className="absolute bottom-0 bg-foreground" />
               </div>
@@ -158,7 +155,7 @@ const About: NextPage = ({}) => {
                   className="group relative grid grid-cols-4 overflow-hidden py-1"
                 >
                   <p>{skill.name}&nbsp;</p>
-                  <p>
+                  <p className="col-span-2 lg:col-span-1">
                     {skill.stack.map((item, index) => (
                       <span key={index}>
                         {index !== skill.stack.length - 1 ? `${item} / ` : item}
@@ -172,7 +169,7 @@ const About: NextPage = ({}) => {
             </>
           ) : filterIndex === 2 ? (
             <div className="flex flex-col gap-8">
-              <p className="h4 ml-12 w-1/2 indent-44">
+              <p className="h4 w-11/12 lg:ml-12 lg:w-1/2 lg:indent-44">
                 I am a 25 year old full stack Typescript/Javascript developer
                 based out of Toronto, ON. I have over 2 years of experience
                 making full stack applications and projects using popular
@@ -186,17 +183,25 @@ const About: NextPage = ({}) => {
                 expanding my expertise to other fields of programming and
                 software development. And then who knows what&apos;s next.
               </p>
-              <div className="relative ml-auto mr-96 aspect-square w-1/5">
-                <Image
-                  unoptimized
-                  src="/media/IMG_1525.jpg"
-                  alt="izzy"
-                  fill
-                  className="object-cover"
-                />
-                <p className="absolute bottom-0 z-10 bg-background px-4">
-                  Izzy
-                </p>
+              <div className="flex justify-end lg:gap-24">
+                <div className="relative aspect-square w-1/2 lg:w-1/5">
+                  <Image
+                    unoptimized
+                    src="/media/IMG_1525.jpg"
+                    alt="izzy"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative aspect-square w-1/2 lg:w-1/5">
+                  <Image
+                    unoptimized
+                    src="/media/hendrix.gif"
+                    alt="hendrix"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           ) : null}

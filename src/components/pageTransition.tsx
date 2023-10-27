@@ -1,10 +1,12 @@
 import gsap from "gsap";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useWindowSize } from "usehooks-ts";
 
 const PageTransition: React.FC = ({}) => {
   const router = useRouter();
   const [disabled, setDisabled] = useState(false);
+  const { width, height } = useWindowSize();
 
   const handleRouteChangeStart = (url: string) => {
     gsap.set(".root", { display: "flex" });
@@ -80,8 +82,10 @@ const PageTransition: React.FC = ({}) => {
   return (
     <div className="root fixed z-10 hidden h-screen w-screen items-center justify-center">
       <div
-        style={{ width: "100vmax", height: "100vmax" }}
-        className="grid grid-cols-12 grid-rows-[repeat(12,_minmax(0,_1fr))]"
+        style={
+          width > height ? { width, height: width } : { width: height, height }
+        }
+        className="grid aspect-square grid-cols-12 grid-rows-[repeat(12,_minmax(0,_1fr))]"
       >
         {Array.from({ length: 144 }).map((_, index) => (
           <span

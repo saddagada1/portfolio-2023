@@ -6,7 +6,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
-import { useElementSize } from "usehooks-ts";
+import { useElementSize, useWindowSize } from "usehooks-ts";
 import FilterTransition from "~/components/filterTransition";
 import { useShuffleText } from "~/lib/hooks";
 import { cn } from "~/lib/utils";
@@ -107,6 +107,7 @@ const projects = [
 
 const Portfolio: NextPage = ({}) => {
   const [container, { width, height }] = useElementSize();
+  const { width: windowWidth } = useWindowSize();
   const splideRef = useRef<Splide>(null!);
   const [shuffle, setShuffle] = useState(false);
   const [disabled, setDisabled] = useState<string | null>("left");
@@ -136,9 +137,9 @@ const Portfolio: NextPage = ({}) => {
       <Head>
         <title>Saivamsi Addagada | Portfolio</title>
       </Head>
-      <main className="z-10 flex-1 px-8 pb-8 pt-16 font-sans">
+      <main className="relative z-10 flex-1 px-4 pb-4 pt-6 lg:px-8 lg:pb-8 lg:pt-16">
         <div className="relative h-1/2 text-right">
-          <h1 className="h1 font-display text-8xl font-thin">
+          <h1 className="h1 font-display text-6xl font-thin lg:text-8xl">
             Selected&nbsp;
             <button
               onClick={() => setShuffle(true)}
@@ -189,12 +190,20 @@ const Portfolio: NextPage = ({}) => {
           <div className="dots-pattern absolute h-full w-full" />
           <Splide
             ref={splideRef}
-            options={{ perPage: 3, perMove: 1, height, arrows: false }}
+            options={{
+              perPage: windowWidth > 1024 ? 3 : 1,
+              perMove: 1,
+              height,
+              arrows: false,
+            }}
             aria-label="Selected Works"
             onMoved={(_, index) =>
               index === 0
                 ? setDisabled("left")
-                : index === data.length - 3 || data.length < 4
+                : windowWidth < 1024 && index === data.length - 1
+                ? setDisabled("right")
+                : (windowWidth > 1024 && index === data.length - 3) ||
+                  data.length < 4
                 ? setDisabled("right")
                 : setDisabled(null)
             }
@@ -217,7 +226,7 @@ const Portfolio: NextPage = ({}) => {
                   </video>
                 ) : (
                   <Avatar
-                    size={width / 3}
+                    size={windowWidth > 1024 ? width / 3 : width}
                     name={project.name}
                     variant="marble"
                     square
