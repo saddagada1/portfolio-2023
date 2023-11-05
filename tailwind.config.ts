@@ -18,9 +18,8 @@ module.exports = {
     extend: {
       fontFamily: {
         display: ["Rader"],
-        serif: ["ui-serif"],
-        sans: ["Neue Montreal", "ui-sans-serif"],
-        mono: ["ui-monospace"],
+        sans: ["Neue Montreal"],
+        mono: ["var(--font-mono)"],
       },
       colors: {
         border: "hsl(var(--border))",
