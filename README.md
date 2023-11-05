@@ -1,10 +1,7 @@
 # My 2@23 Portfolio
 
-Work in progress...
+Always a work in progress :)
 
-## To Do
+A collection of selected projects and little personal info about the man behind the keyboard.
 
-- Some copywriting
-- Responsive design (mobile)
-- UI tweaks
-- more... ?
+Live Website: https://saivamsi.ca

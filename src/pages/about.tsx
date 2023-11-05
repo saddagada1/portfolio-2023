@@ -203,7 +203,7 @@ const About: NextPage = ({}) => {
           onClick={() => setShowIzzy(!showIzzy)}
           className="order-first col-span-6 flex cursor-pointer items-center overflow-hidden border p-2 lg:order-none"
         >
-          <h1 className="marquee text-2xl font-bold uppercase md:text-9xl">
+          <h1 className="marquee text-2xl font-bold uppercase sm:text-9xl">
             {Array.from({ length: 4 }).map((_, index) => (
               <span key={index}>
                 &nbsp;Hello I&apos;m{" "}
