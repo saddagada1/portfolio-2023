@@ -77,7 +77,7 @@ const Index = () => {
             <div
               key={project.id}
               className={cn(
-                "grid grid-rows-4 border lg:h-[200px] lg:shrink-0 lg:grid-cols-4 lg:grid-rows-1",
+                "grid grid-rows-4 border lg:shrink-0 lg:grid-cols-4 lg:grid-rows-1",
                 index !== 0 && "mt-2",
               )}
             >

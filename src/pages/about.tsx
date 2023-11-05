@@ -96,6 +96,7 @@ const essentials = [
 const About: NextPage = ({}) => {
   const isWindow = useIsClient();
   const [showIzzy, setShowIzzy] = useState(false);
+  const [essential] = useState(essentials[rand(0, essentials.length - 1)]);
   return (
     <>
       <Head>
@@ -194,22 +195,15 @@ const About: NextPage = ({}) => {
           <h1 className="section-label mb-8">Essentials</h1>
           <div className="aspect-video w-full">
             {isWindow && (
-              <ReactPlayer
-                width="100%"
-                height="100%"
-                url={essentials[rand(0, essentials.length - 1)]}
-                config={{
-                  youtube: { playerVars: { controls: 0, showInfo: 0 } },
-                }}
-              />
+              <ReactPlayer width="100%" height="100%" url={essential} />
             )}
           </div>
         </div>
         <div
           onClick={() => setShowIzzy(!showIzzy)}
-          className="order-first col-span-6 cursor-pointer overflow-hidden border p-2 lg:order-none"
+          className="order-first col-span-6 flex cursor-pointer items-center overflow-hidden border p-2 lg:order-none"
         >
-          <h1 className="marquee text-2xl font-bold uppercase lg:text-9xl">
+          <h1 className="marquee text-2xl font-bold uppercase md:text-9xl">
             {Array.from({ length: 4 }).map((_, index) => (
               <span key={index}>
                 &nbsp;Hello I&apos;m{" "}
