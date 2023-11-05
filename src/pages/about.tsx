@@ -107,7 +107,7 @@ const About: NextPage = ({}) => {
             <Image
               unoptimized
               priority
-              src={showIzzy ? "/media/izzy.jpg" : "/media/self.jpg"}
+              src={showIzzy ? "/media/izzy.jpg" : "/media/self.JPG"}
               alt="Me"
               fill
               className="object-cover"

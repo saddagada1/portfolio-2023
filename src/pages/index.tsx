@@ -54,7 +54,7 @@ const projects = [
       },
       {
         link: "JWT for Mobile",
-        href: "https://github.com/saddagada1/graphql-jwt-auth-boiler-plate",
+        href: "https://github.com/saddagada1/graphql-jwt-auth-boiler-plate-mobile",
       },
       {
         link: "Session",
