@@ -1,54 +1,78 @@
 import gsap from "gsap";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useWindowSize } from "usehooks-ts";
+import { useEffectOnce, useWindowSize } from "usehooks-ts";
 import { cn } from "~/lib/utils";
 
 const Cursor: React.FC = ({}) => {
   const router = useRouter();
   const [disabled, setDisabled] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  // const [background, setBackground] = useState<string | null>(null);
   const { width, height } = useWindowSize();
-  const cols = width >= height ? 16 : 12;
-  const rows = width >= height ? 12 : 16;
+  const cols = width >= height ? 12 : 8;
+  const rows = width >= height ? 8 : 12;
+
+  useEffectOnce(() => {
+    gsap.to(".grid-item", {
+      opacity: 0,
+      duration: 0.1,
+      ease: "power4.inOut",
+      stagger: {
+        from: "random",
+        amount: 1,
+      },
+      delay: 1,
+    });
+  });
 
   useEffect(() => {
     if (disabled) return;
 
     const handleRouteChangeStart = (url: string) => {
-      // gsap.set(".grid-item", { backgroundColor: `hsl(${background})` });
-      gsap.timeline().to(".grid-item", {
-        opacity: 1,
-        duration: 0.1,
-        ease: "power4.inOut",
-        stagger: {
-          from: currentIndex ?? "center",
-          each: 0.05,
-          grid: [rows, cols],
-        },
-        onComplete: () => {
-          void handleRouteChangeComplete(url);
-        },
-      });
+      gsap
+        .timeline()
+        .to(".grid-item", {
+          opacity: 1,
+          duration: 0.1,
+          ease: "power4.inOut",
+          stagger: {
+            from: currentIndex ?? "center",
+            each: 0.1,
+            grid: [rows, cols],
+          },
+        })
+        .to(".page", {
+          opacity: 0.1,
+          ease: "none",
+          duration: 1,
+          onComplete: () => {
+            void handleRouteChangeComplete(url);
+          },
+        });
     };
 
     const handleRouteChangeComplete = async (url: string) => {
       await router.push(url);
-      gsap.timeline().to(".grid-item", {
-        opacity: 0,
-        duration: 0.1,
-        ease: "power4.inOut",
-        stagger: {
-          from: currentIndex ?? "center",
-          each: 0.05,
-          grid: [rows, cols],
-        },
-        onComplete: () => {
-          // gsap.set(".grid-item", { backgroundColor: `transparent` });
-          setDisabled(false);
-        },
-      });
+      gsap
+        .timeline()
+        .to(".page", {
+          opacity: 1,
+          ease: "none",
+          duration: 1,
+        })
+        .to(".grid-item", {
+          opacity: 0,
+          duration: 0.1,
+          ease: "power4.inOut",
+          stagger: {
+            from: currentIndex ?? "center",
+            each: 0.1,
+            grid: [rows, cols],
+          },
+          onComplete: () => {
+            setDisabled(false);
+          },
+        });
     };
 
     const routeChangeStart = (url: string) => {
@@ -63,7 +87,11 @@ const Cursor: React.FC = ({}) => {
       throw "Aborting route change. You can safely ignore this error.";
     };
 
-    const handleClick = (index: number) => {
+    const handleClick = (e: MouseEvent) => {
+      const ignore = (e.target as HTMLElement).closest("a");
+      if (ignore) return;
+      const index = calcGridItem(e);
+      if (!index) return;
       const cells = ".grid-item";
       gsap.to(cells, {
         duration: 0.1,
@@ -88,14 +116,16 @@ const Cursor: React.FC = ({}) => {
       });
     };
 
-    const handleMouseOver = (index: number) => {
+    const handleMouseOver = (e: MouseEvent) => {
+      const index = calcGridItem(e);
+      if (!index) return;
       const cell = `.grid-item-${index}`;
       if (gsap.isTweening(cell)) return;
       gsap.to(cell, { opacity: 1 });
       gsap.to(cell, { opacity: 0, delay: 0.2 });
     };
 
-    const calcGridItem = (e: MouseEvent, click: boolean) => {
+    const calcGridItem = (e: MouseEvent) => {
       const colSize = width / cols;
       const rowSize = height / rows;
 
@@ -107,33 +137,19 @@ const Cursor: React.FC = ({}) => {
       if (index >= cols * rows || index < 0) return;
 
       setCurrentIndex(index);
-
-      const ignore = (e.target as HTMLElement).closest("a");
-
-      click && !ignore ? handleClick(index) : handleMouseOver(index);
+      return index;
     };
 
     router.events.on("routeChangeStart", routeChangeStart);
-    window.addEventListener("mousemove", (e) => calcGridItem(e, false));
-    window.addEventListener("click", (e) => calcGridItem(e, true));
+    window.addEventListener("mousemove", handleMouseOver);
+    window.addEventListener("click", handleClick);
 
     return () => {
       router.events.off("routeChangeStart", routeChangeStart);
-      window.removeEventListener("mousemove", (e) => calcGridItem(e, false));
-      window.removeEventListener("click", (e) => calcGridItem(e, true));
+      window.removeEventListener("mousemove", handleMouseOver);
+      window.removeEventListener("click", handleClick);
     };
   }, [cols, currentIndex, disabled, height, router, rows, width]);
-
-  // useEffect(() => {
-  //   if (typeof window === undefined) return;
-  //   if (!background) {
-  //     setBackground(
-  //       getComputedStyle(document.documentElement).getPropertyValue(
-  //         "--destructive",
-  //       ),
-  //     );
-  //   }
-  // }, [background]);
 
   return (
     <div
@@ -147,7 +163,7 @@ const Cursor: React.FC = ({}) => {
         <span
           key={index}
           className={cn(
-            "grid-item h-full w-full opacity-0 backdrop-blur-3xl",
+            "grid-item h-full w-full origin-top-left backdrop-blur-3xl",
             `grid-item-${index}`,
           )}
         />

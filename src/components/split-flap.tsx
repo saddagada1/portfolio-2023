@@ -1,6 +1,12 @@
 import gsap from "gsap";
 import { useTheme } from "next-themes";
 import { type HTMLAttributes, useEffect, useState, useMemo } from "react";
+import {
+  accent,
+  background,
+  darkAccent,
+  darkBackground,
+} from "~/lib/constants";
 import { cn } from "~/lib/utils";
 
 interface CharacterProps extends HTMLAttributes<HTMLDivElement> {
@@ -18,6 +24,7 @@ const Character: React.FC<CharacterProps> = ({
   ...props
 }) => {
   const { className, style, ...rest } = props;
+  const { theme } = useTheme();
   const [characterSet] = useState("abcdefghijklmnopqrstuvwxyz*".split(""));
   const [character, setCharacter] = useState(
     characterSet[
@@ -28,8 +35,6 @@ const Character: React.FC<CharacterProps> = ({
         : 0
     ]!,
   );
-  const [background, setBackground] = useState<string | null>(null);
-  const [accent, setAccent] = useState<string | null>(null);
 
   const nextChar = useMemo(() => {
     if (character === target) return character;
@@ -43,26 +48,34 @@ const Character: React.FC<CharacterProps> = ({
   }, [character, characterSet, target]);
 
   useEffect(() => {
-    if (!background || !accent) return;
-
     const tl = gsap.timeline();
 
     const animate = () => {
       tl.fromTo(
         `.${identifier}-top`,
-        { rotateX: "0deg", backgroundColor: `hsl(${accent})` },
+        {
+          rotateX: "0deg",
+          backgroundColor: `hsl(${theme === "dark" ? darkAccent : accent})`,
+        },
         {
           rotateX: "-90deg",
-          backgroundColor: `hsl(${background})`,
+          backgroundColor: `hsl(${
+            theme === "dark" ? darkBackground : background
+          })`,
           duration: 0.1,
           ease: "none",
         },
       ).fromTo(
         `.${identifier}-bottom`,
-        { rotateX: "90deg", backgroundColor: `hsl(${accent})` },
+        {
+          rotateX: "90deg",
+          backgroundColor: `hsl(${theme === "dark" ? darkAccent : accent})`,
+        },
         {
           rotateX: "0deg",
-          backgroundColor: `hsl(${background})`,
+          backgroundColor: `hsl(${
+            theme === "dark" ? darkBackground : background
+          })`,
           duration: 0.1,
           ease: "none",
           onComplete: () => {
@@ -79,23 +92,7 @@ const Character: React.FC<CharacterProps> = ({
     return () => {
       tl.kill();
     };
-  }, [accent, background, character, identifier, nextChar, target]);
-
-  useEffect(() => {
-    if (typeof window === undefined) return;
-    if (!background || !accent) {
-      setBackground(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--background",
-        ),
-      );
-      setAccent(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--primary-foreground",
-        ),
-      );
-    }
-  }, [background, accent]);
+  }, [character, identifier, nextChar, target, theme]);
 
   return (
     <div
@@ -115,6 +112,11 @@ const Character: React.FC<CharacterProps> = ({
         {nextChar}
       </p>
       <p
+        style={{
+          backgroundColor: `hsl(${
+            theme === "dark" ? darkBackground : background
+          })`,
+        }}
         className={cn(
           "clip-top split-flap absolute",
           `${identifier}-top`,
@@ -132,7 +134,12 @@ const Character: React.FC<CharacterProps> = ({
         {character}
       </p>
       <p
-        style={{ transform: "rotateX(90deg)" }}
+        style={{
+          transform: "rotateX(90deg)",
+          backgroundColor: `hsl(${
+            theme === "dark" ? darkBackground : background
+          })`,
+        }}
         className={cn(
           "clip-bottom split-flap absolute",
           `${identifier}-bottom`,
@@ -156,12 +163,10 @@ const SplitFlap: React.FC<SplitFlapProps> = ({
   ...props
 }) => {
   const { className, style, ...rest } = props;
-  const { theme } = useTheme();
   const empties = "* ";
   return (
     <div
       {...rest}
-      key={theme}
       style={{ perspective: 1000, ...style }}
       className={cn("flex gap-2", className)}
     >

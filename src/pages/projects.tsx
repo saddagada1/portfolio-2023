@@ -1,6 +1,5 @@
 import Avatar from "boring-avatars";
 import type { NextPage } from "next";
-import { useTheme } from "next-themes";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,7 +11,6 @@ import { cn } from "~/lib/utils";
 
 const Projects: NextPage = ({}) => {
   const [project, setProject] = useState(projects[0]);
-  const { theme } = useTheme();
   return (
     <>
       <Head>
@@ -21,8 +19,11 @@ const Projects: NextPage = ({}) => {
       <div className="flex flex-1 flex-col gap-2">
         <div className="flex flex-1 flex-col gap-2">
           {projects.map((project) => (
-            <div key={project.id} className="section grid flex-1 grid-cols-3 ">
-              <div className="col-span-3 flex flex-1 flex-col justify-between lg:col-span-2">
+            <div
+              key={project.id}
+              className="section group grid flex-1 grid-cols-3 p-0"
+            >
+              <div className="col-span-3 flex flex-1 flex-col justify-between p-4 lg:col-span-2">
                 <h1 className="h1">
                   <span className="font-thin text-destructive">
                     {(project.id / 100).toString().replace(".", "")}&nbsp;
@@ -44,7 +45,9 @@ const Projects: NextPage = ({}) => {
                   ))}
                 </div>
               </div>
-              <div className="relative hidden overflow-hidden lg:block">
+              <div className="relative hidden overflow-hidden opacity-0 transition-opacity duration-1000 group-hover:opacity-100 lg:block">
+                <div className="absolute aspect-square h-1/2 -translate-y-1/3  bg-background" />
+                <div className="absolute aspect-square h-1/2 -translate-x-1/2 translate-y-1/3 bg-background" />
                 {project.bg ? (
                   <video
                     autoPlay
@@ -73,11 +76,7 @@ const Projects: NextPage = ({}) => {
           className="text-3xl md:text-7xl"
         />
         <div className="section relative flex h-full flex-col p-0">
-          <Pixels
-            key={theme}
-            onComplete={(i) => setProject(projects[i])}
-            delay={5}
-          />
+          <Pixels onComplete={(i) => setProject(projects[i])} delay={5} />
           <h1 className="section-label absolute left-0 top-0 z-30 m-4">
             {project?.name}
           </h1>

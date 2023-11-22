@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import gsap from "gsap";
 import { cn } from "~/lib/utils";
-import { projects } from "~/lib/constants";
+import { darkForeground, foreground, projects } from "~/lib/constants";
+import { useTheme } from "next-themes";
 
 interface PixelsProps {
   delay?: number;
@@ -9,8 +10,8 @@ interface PixelsProps {
 }
 
 const Pixels: React.FC<PixelsProps> = ({ delay, onComplete }) => {
+  const { theme } = useTheme();
   const [glyphIndex, setGlyphIndex] = useState(0);
-  const [foreground, setForeground] = useState<string | null>(null);
   const cols = 12;
   const rows = 12;
 
@@ -19,14 +20,14 @@ const Pixels: React.FC<PixelsProps> = ({ delay, onComplete }) => {
   }, [glyphIndex]);
 
   useEffect(() => {
-    if (!foreground || !glyph) return;
+    if (!glyph) return;
 
     const tl = gsap.timeline();
 
     const selectedPixels = glyph.map((index) => `.pixel-grid-item-${index}`);
 
     tl.to(selectedPixels, {
-      backgroundColor: `hsl(${foreground})`,
+      backgroundColor: `hsl(${theme === "dark" ? darkForeground : foreground})`,
       stagger: { each: 0.1 },
       onComplete: () => {
         onComplete && onComplete(glyphIndex);
@@ -50,18 +51,7 @@ const Pixels: React.FC<PixelsProps> = ({ delay, onComplete }) => {
     return () => {
       tl.kill();
     };
-  }, [delay, foreground, glyph, glyphIndex, onComplete]);
-
-  useEffect(() => {
-    if (typeof window === undefined) return;
-    if (!foreground) {
-      setForeground(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--foreground",
-        ),
-      );
-    }
-  }, [foreground]);
+  }, [delay, glyph, glyphIndex, onComplete, theme]);
 
   return (
     <div

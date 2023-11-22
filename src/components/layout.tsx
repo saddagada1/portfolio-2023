@@ -26,7 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="flex h-screen w-screen flex-col gap-2 overflow-x-hidden overflow-y-scroll p-2 lg:overflow-hidden">
         <main
           className={cn(
-            "flex flex-1 gap-2 font-sans lg:flex-row",
+            "page flex flex-1 gap-2 font-sans lg:flex-row",
             router.pathname === "/" ? "flex-col" : "flex-col-reverse",
           )}
         >

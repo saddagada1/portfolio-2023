@@ -1,3 +1,10 @@
+export const background = "0 0% 100%";
+export const darkBackground = "0 0% 3.9%";
+export const foreground = "0 0% 3.9%";
+export const darkForeground = "0 0% 98%";
+export const accent = "0 0% 98%";
+export const darkAccent = "0 0% 9%";
+
 export const projects = [
   {
     id: 1,

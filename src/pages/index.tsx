@@ -1,4 +1,3 @@
-import { useTheme } from "next-themes";
 import Head from "next/head";
 import Link from "next/link";
 import Name from "~/components/name";
@@ -8,7 +7,6 @@ import Socials from "~/components/socials";
 import { Button } from "~/components/ui/button";
 
 const Index = () => {
-  const { theme } = useTheme();
   return (
     <>
       <Head>
@@ -31,7 +29,7 @@ const Index = () => {
           asChild
         >
           <Link href="/projects">
-            <Pixels key={theme} />
+            <Pixels />
             <h1 className="section-label absolute left-0 top-0 z-30 m-4">
               Projects
             </h1>
@@ -53,7 +51,7 @@ const Index = () => {
             <Orbs
               identifier="side-nav-orb"
               bounds={100}
-              blur="backdrop-blur-2xl"
+              blur="backdrop-blur-3xl"
               size="w-1/2"
               grain
               className="hidden h-full w-full lg:flex"
@@ -64,15 +62,7 @@ const Index = () => {
               blur="backdrop-blur-2xl"
               size="w-1/2"
               grain
-              className="hidden aspect-square h-full w-full sm:flex lg:hidden"
-            />
-            <Orbs
-              identifier="side-nav-orb"
-              bounds={50}
-              blur="backdrop-blur-2xl"
-              size="w-1/3"
-              grain
-              className="aspect-square h-full w-full sm:hidden"
+              className="aspect-square h-full w-full lg:hidden"
             />
             <h1 className="section-label absolute left-0 top-0 z-30 m-4">
               About

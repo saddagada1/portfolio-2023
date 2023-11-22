@@ -5,6 +5,8 @@ import Link from "next/link";
 import Orbs from "~/components/orbs";
 import Socials from "~/components/socials";
 import SplitFlap from "~/components/split-flap";
+import { skills, stack } from "~/lib/constants";
+import { cn } from "~/lib/utils";
 
 const About: NextPage = ({}) => {
   return (
@@ -26,7 +28,7 @@ const About: NextPage = ({}) => {
             has primarily been one of self-education. I&apos;ve acquired the
             bulk of my knowledge through online courses and tutorials,
             constantly pushing my boundaries by tackling progressively more
-            complex{" "}
+            complex&nbsp;
             <Link href="/projects" className="underline">
               projects
             </Link>
@@ -36,18 +38,59 @@ const About: NextPage = ({}) => {
             lies beyond that, the future remains an open question.
           </p>
         </div>
-        <div className="section relative flex-1 p-0">
-          <Orbs
-            identifier="about-orb"
-            bounds={50}
-            blur="backdrop-blur-2xl"
-            grain
-            className="aspect-square h-full w-full lg:aspect-auto"
-          />
-          <h1 className="section-label absolute left-0 top-0 z-30 m-4">Me</h1>
-          <p className="button-label absolute bottom-0 right-0 z-30 m-4">
-            At Any Given Moment
-          </p>
+        <div className="flex flex-1 flex-col gap-2 lg:flex-row">
+          <div className="section flex flex-col">
+            <h1 className="section-label mb-8">Skills</h1>
+            {skills.map((section, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "grid grid-cols-2 text-sm",
+                  index !== 0 && "mt-2",
+                )}
+              >
+                <p className="text-destructive">{section.experience}&nbsp;</p>
+                <ul>
+                  {section.skills.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="section relative flex-1 p-0">
+            <Orbs
+              identifier="about-orb"
+              bounds={50}
+              blur="backdrop-blur-2xl"
+              size="w-1/2"
+              grain
+              className="aspect-square h-full w-full lg:aspect-auto"
+            />
+            <h1 className="section-label absolute left-0 top-0 z-30 m-4">Me</h1>
+            <p className="button-label absolute bottom-0 right-0 z-30 m-4">
+              At Any Given Moment
+            </p>
+          </div>
+          <div className="section flex flex-col">
+            <h1 className="section-label mb-8">Stack</h1>
+            {stack.map((area, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "grid grid-cols-2 text-sm",
+                  index !== 0 && "mt-2",
+                )}
+              >
+                <p className="text-destructive">{area.name}&nbsp;</p>
+                <ul>
+                  {area.stack.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="flex flex-1 flex-col-reverse gap-2 lg:flex-col">
