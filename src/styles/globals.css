@@ -57,7 +57,7 @@
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 14.9%;
@@ -92,46 +92,96 @@
     @apply scroll-m-20 font-medium tracking-tight sm:text-lg lg:text-xl;
   }
   .section-label {
-    @apply flex-1 text-sm font-medium lg:text-base;
+    @apply w-full flex-1 font-medium;
   }
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("../../public/fonts/PPNeueMontreal-Thin.otf") format("opentype");
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("../../public/fonts/PPNeueMontreal-Book.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("../../public/fonts/PPNeueMontreal-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("../../public/fonts/PPNeueMontreal-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
+  .section {
+    @apply border p-4;
+  }
+  .button-label {
+    @apply w-full text-right text-sm font-normal text-destructive;
+  }
+  .split-flap {
+    @apply flex h-full w-full items-center justify-center bg-background p-2 leading-none;
+  }
 }
 
 * {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* -ms-overflow-style: none;
+  scrollbar-width: none; */
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
+} */
+
+*::selection {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.clip-top {
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+
+.clip-bottom {
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
+}
+
+.grain {
+  background-image: url("../../public/media/noise.png");
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.anim-grain {
+  background-image: url("../../public/media/noise.png");
+  height: 300%;
+  width: 300%;
+  position: absolute;
+  pointer-events: none;
+  animation: grain 4s steps(5) infinite;
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(-15%, -20%);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, -20%);
+  }
+  30% {
+    transform: translate(-5%, -10%);
+  }
+  40% {
+    transform: translate(-15%, -20%);
+  }
+  50% {
+    transform: translate(-5%, -10%);
+  }
+  60% {
+    transform: translate(-15%, -20%);
+  }
+  70% {
+    transform: translate(-5%, -10%);
+  }
+  80% {
+    transform: translate(-15%, -20%);
+  }
+  90% {
+    transform: translate(-5%, -10%);
+  }
+  100% {
+    transform: translate(-15%, -20%);
+  }
 }
 
 .marquee {

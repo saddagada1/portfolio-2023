@@ -18,12 +18,12 @@ module.exports = {
     extend: {
       screens: {
         lg: {
-          raw: "((min-width: 1536px) and (min-aspect-ratio: 16/10))",
+          raw: "((min-width: 1024px) and (min-aspect-ratio: 16/10))",
         },
       },
       fontFamily: {
         display: ["Rader"],
-        sans: ["Neue Montreal"],
+        sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
       colors: {

@@ -7,6 +7,7 @@ interface OrbsProps extends HTMLAttributes<HTMLDivElement> {
   bounds: number;
   blur?: string;
   size?: string;
+  grain?: boolean;
 }
 
 const Orbs: React.FC<OrbsProps> = ({
@@ -14,6 +15,7 @@ const Orbs: React.FC<OrbsProps> = ({
   bounds,
   blur,
   size,
+  grain,
   ...props
 }) => {
   const { className, ...rest } = props;
@@ -23,7 +25,8 @@ const Orbs: React.FC<OrbsProps> = ({
     gsap.to(`.${identifier}`, {
       x: `random(-${bounds}, ${bounds}, 1)`,
       y: `random(-${bounds}, ${bounds}, 1)`,
-      ease: "none",
+      opacity: `random(0, 1, 0.1)`,
+      ease: "power4.inOut",
       duration: 1,
       repeat: -1,
       repeatRefresh: true,
@@ -32,14 +35,29 @@ const Orbs: React.FC<OrbsProps> = ({
       timeline.kill();
     };
   }, [bounds, identifier]);
+
   return (
     <div
       {...rest}
       className={cn(
+        "relative flex items-center justify-center overflow-hidden",
         className,
-        "relative flex aspect-square items-center justify-center overflow-hidden",
       )}
     >
+      <div
+        className={cn(
+          "absolute aspect-square rounded-full bg-purple-500",
+          identifier,
+          size ?? "w-1/3",
+        )}
+      />
+      <div
+        className={cn(
+          "absolute aspect-square rounded-full bg-green-500",
+          identifier,
+          size ?? "w-1/3",
+        )}
+      />
       <div
         className={cn(
           "absolute aspect-square rounded-full bg-blue-500",
@@ -63,24 +81,13 @@ const Orbs: React.FC<OrbsProps> = ({
       />
       <div
         className={cn(
-          "absolute aspect-square rounded-full bg-purple-500",
-          identifier,
-          size ?? "w-1/3",
+          "absolute bottom-0 left-0 right-0 top-0 z-10 h-full w-full",
+          blur ?? "backdrop-blur-[6px]",
         )}
       />
-      <div
-        className={cn(
-          "absolute aspect-square rounded-full bg-green-500",
-          identifier,
-          size ?? "w-1/3",
-        )}
-      />
-      <div
-        className={cn(
-          "absolute bottom-0 left-0 right-0 top-0 h-full w-full",
-          blur ?? "backdrop-blur-md",
-        )}
-      />
+      {grain && (
+        <div className="anim-grain z-20 opacity-10 mix-blend-overlay" />
+      )}
     </div>
   );
 };
