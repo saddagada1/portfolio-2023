@@ -17,12 +17,11 @@ module.exports = {
     },
     extend: {
       screens: {
-        lg: {
+        hr: {
           raw: "((min-width: 1024px) and (min-aspect-ratio: 16/10))",
         },
       },
       fontFamily: {
-        display: ["Rader"],
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
@@ -83,7 +82,7 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        hr: "hr 1s steps(10)",
+        hr: "hr 1s 2s ease-in-out forwards",
       },
     },
   },

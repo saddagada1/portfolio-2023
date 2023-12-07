@@ -1,11 +1,10 @@
-import Avatar from "boring-avatars";
+import { Github, Globe, MoveLeft, MoveRight } from "lucide-react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import Pixels from "~/components/pixels";
-import Socials from "~/components/socials";
-import SplitFlap from "~/components/split-flap";
+import { Button } from "~/components/ui/button";
 import { projects } from "~/lib/constants";
 import { cn } from "~/lib/utils";
 
@@ -16,81 +15,78 @@ const Projects: NextPage = ({}) => {
       <Head>
         <title>Saivamsi Addagada - Projects</title>
       </Head>
-      <div className="flex flex-1 flex-col gap-2">
-        <div className="flex flex-1 flex-col gap-2">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="section group grid flex-1 grid-cols-3 p-0"
-            >
-              <div className="col-span-3 flex flex-1 flex-col justify-between p-4 lg:col-span-2">
-                <h1 className="h1">
-                  <span className="font-thin text-destructive">
-                    {(project.id / 100).toString().replace(".", "")}&nbsp;
-                  </span>
-                  {project.name}
-                </h1>
-                <div className="flex gap-2">
-                  {project.links.map(({ link, href }, index) => (
-                    <Link
-                      key={index}
-                      href={href}
-                      className={cn(
-                        "text-sm hover:underline",
-                        index !== 0 && "border-l pl-2",
-                      )}
-                    >
-                      {link}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div className="relative hidden overflow-hidden opacity-0 transition-opacity duration-1000 group-hover:opacity-100 lg:block">
-                <div className="absolute aspect-square h-1/2 -translate-y-1/3  bg-background" />
-                <div className="absolute aspect-square h-1/2 -translate-x-1/2 translate-y-1/3 bg-background" />
-                {project.bg ? (
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="h-full w-full object-cover"
-                  >
-                    <source src={project.bg} />
-                  </video>
-                ) : (
-                  <div className="aspect-video h-full overflow-hidden">
-                    <Avatar size={400} name={project.name} square />
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-        <Socials />
-      </div>
-      <div className="flex flex-1 flex-col gap-2">
-        <SplitFlap
-          target="pr*jects"
-          identifier="projects"
-          className="text-3xl md:text-7xl"
-        />
-        <div className="section relative flex h-full flex-col p-0">
-          <Pixels onComplete={(i) => setProject(projects[i])} delay={5} />
-          <h1 className="section-label absolute left-0 top-0 z-30 m-4">
-            {project?.name}
+      <main className="flex flex-1 flex-col">
+        <div className="flex items-center border-b">
+          <h1 className="h1 flex-1 p-2 uppercase">
+            <span className="text-destructive">Pro</span>jects
           </h1>
-          <p className="button-label absolute bottom-0 right-0 z-30 m-4">
-            {project && (project.id / 100).toString().replace(".", "")}
-          </p>
+          <div className="flex h-full flex-col hr:flex-1 hr:flex-row">
+            <Button
+              onClick={() => {
+                if (!project) return;
+                if (project.id === 1) {
+                  setProject(projects[projects.length - 1]);
+                } else {
+                  setProject(projects[project.id - 2]);
+                }
+              }}
+              variant="outline"
+              size="nav"
+              className="border-r-0 border-t-0 hr:border-b-0 hr:border-r"
+            >
+              <p className="section-label">Previous</p>
+              <MoveLeft strokeWidth={0.5} className="icon" />
+            </Button>
+            <Button
+              onClick={() => {
+                if (!project) return;
+                if (project.id === projects.length) {
+                  setProject(projects[0]);
+                } else {
+                  setProject(projects[project.id]);
+                }
+              }}
+              variant="outline"
+              size="nav"
+              className="border-y-0 border-r-0 hr:border-0"
+            >
+              <p className="section-label">Next</p>
+              <MoveRight strokeWidth={0.5} className="icon" />
+            </Button>
+          </div>
         </div>
-        <div className="section flex flex-1 flex-col items-center justify-center lg:h-[210px] lg:flex-none">
-          <h1 className="section-label mb-8 flex-none">Summary</h1>
-          <p className="w-5/6 flex-1 text-sm font-normal text-destructive">
-            {project?.summary}
-          </p>
+        <div className="flex flex-1 flex-col hr:flex-row-reverse">
+          <Pixels glyph={project?.glyph} />
+          <div className="flex flex-1 flex-col border-t hr:border-r hr:border-t-0">
+            <div className="flex flex-1 flex-col justify-end p-2">
+              <h1 className="h2">{project?.name}</h1>
+              <p className="p hr:w-5/6">{project?.summary}</p>
+            </div>
+            <div className="flex h-20 border-t hr:h-40">
+              {project?.links.map(({ link, type, href }, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  size="nav"
+                  asChild
+                  className={cn(
+                    index !== 0 ? "border-y-0 border-r-0" : "border-0",
+                  )}
+                >
+                  <Link href={href}>
+                    <p className="section-label">{link}</p>
+                    {type === "Github" ? (
+                      <Github strokeWidth={0.5} className="icon" />
+                    ) : (
+                      <Globe strokeWidth={0.5} className="icon" />
+                    )}
+                  </Link>
+                </Button>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
     </>
   );
 };

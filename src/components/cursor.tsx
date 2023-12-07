@@ -1,10 +1,13 @@
 import gsap from "gsap";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useEffectOnce, useWindowSize } from "usehooks-ts";
+import { useWindowSize } from "usehooks-ts";
+import { darkForeground, foreground } from "~/lib/constants";
 import { cn } from "~/lib/utils";
 
 const Cursor: React.FC = ({}) => {
+  const { theme } = useTheme();
   const router = useRouter();
   const [disabled, setDisabled] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
@@ -12,67 +15,64 @@ const Cursor: React.FC = ({}) => {
   const cols = width >= height ? 12 : 8;
   const rows = width >= height ? 8 : 12;
 
-  useEffectOnce(() => {
-    gsap.to(".grid-item", {
-      opacity: 0,
-      duration: 0.1,
-      ease: "power4.inOut",
-      stagger: {
-        from: "random",
-        amount: 1,
-      },
-      delay: 1,
-    });
-  });
-
   useEffect(() => {
     if (disabled) return;
 
     const handleRouteChangeStart = (url: string) => {
-      gsap
-        .timeline()
-        .to(".grid-item", {
-          opacity: 1,
-          duration: 0.1,
-          ease: "power4.inOut",
-          stagger: {
-            from: currentIndex ?? "center",
-            each: 0.1,
-            grid: [rows, cols],
-          },
-        })
-        .to(".page", {
-          opacity: 0.1,
-          ease: "none",
-          duration: 1,
-          onComplete: () => {
-            void handleRouteChangeComplete(url);
-          },
-        });
+      const cells = ".grid-item";
+      gsap.to(cells, {
+        opacity: 1,
+        duration: 0.1,
+        ease: "power4.inOut",
+        stagger: {
+          from: currentIndex ?? "center",
+          each: 0.1,
+          grid: [rows, cols],
+        },
+      });
+      gsap.to(cells, {
+        ease: "power4.inOut",
+        backgroundColor: `hsl(${
+          theme === "dark" ? darkForeground : foreground
+        })`,
+        stagger: {
+          from: currentIndex ?? "center",
+          each: 0.1,
+          grid: [rows, cols],
+        },
+        delay: 0.1,
+        onComplete: () => {
+          void handleRouteChangeComplete(url);
+        },
+      });
     };
 
     const handleRouteChangeComplete = async (url: string) => {
       await router.push(url);
-      gsap
-        .timeline()
-        .to(".page", {
-          opacity: 1,
-          ease: "none",
-          duration: 1,
-        })
-        .to(".grid-item", {
-          opacity: 0,
-          duration: 0.1,
-          ease: "power4.inOut",
-          stagger: {
-            from: currentIndex ?? "center",
-            each: 0.1,
-            grid: [rows, cols],
-          },
-          onComplete: () => {
-            setDisabled(false);
-          },
-        });
+      const cells = ".grid-item";
+      gsap.to(cells, {
+        ease: "power4.inOut",
+        backgroundColor: "transparent",
+        stagger: {
+          from: currentIndex ?? "center",
+          each: 0.1,
+          grid: [rows, cols],
+        },
+      });
+      gsap.to(cells, {
+        opacity: 0,
+        duration: 0.1,
+        ease: "power4.inOut",
+        stagger: {
+          from: currentIndex ?? "center",
+          each: 0.1,
+          grid: [rows, cols],
+        },
+        delay: 0.5,
+        onComplete: () => {
+          setDisabled(false);
+        },
+      });
     };
 
     const routeChangeStart = (url: string) => {
@@ -149,7 +149,7 @@ const Cursor: React.FC = ({}) => {
       window.removeEventListener("mousemove", handleMouseOver);
       window.removeEventListener("click", handleClick);
     };
-  }, [cols, currentIndex, disabled, height, router, rows, width]);
+  }, [cols, currentIndex, disabled, height, router, rows, theme, width]);
 
   return (
     <div
@@ -163,7 +163,7 @@ const Cursor: React.FC = ({}) => {
         <span
           key={index}
           className={cn(
-            "grid-item h-full w-full origin-top-left backdrop-blur-3xl",
+            "grid-item h-full w-full origin-top-left opacity-0 backdrop-blur-3xl",
             `grid-item-${index}`,
           )}
         />

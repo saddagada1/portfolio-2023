@@ -12,10 +12,13 @@ export const projects = [
     type: "Project",
     summary:
       "Inspired by Ultimate Guitar, Sloopy is a platform for users to connect, learn and create compositions for all of their favourite songs. Integrated with Spotify to allow for streaming audio and a seamless connection to their personal music libraries, users are able to break down songs into loops, access and annotate keys, bpm, modes and scales, and sync individual sections with chords or tablature. Turning once previously complex musical progressions into much more manageable and accessible arrangements, Sloopy fosters creativity and musical exploration for users of all skill levels.",
-    bg: "/media/sloopy-hero.mp4",
     links: [
-      { link: "Github", href: "https://github.com/saddagada1/sloopy" },
-      { link: "Live Website", href: "https://sloopy.saivamsi.ca" },
+      {
+        link: "Source",
+        type: "Github",
+        href: "https://github.com/saddagada1/sloopy",
+      },
+      { link: "Demo", type: "Web", href: "https://sloopy.saivamsi.ca" },
     ],
     glyph: [
       45, 32, 31, 19, 18, 30, 42, 54, 66, 78, 90, 102, 114, 125, 124, 123, 110,
@@ -28,10 +31,13 @@ export const projects = [
     type: "Project",
     summary:
       "An e-commerce marketplace, inspired by Depop and Grailed, with a robust array of features. This includes user authentication, account and store setup, product creation, advanced search and filtering options, product sorting, shopping cart management, checkout and secure payment processing, shipping and order management, and streamlined refund procedures. While certain elements, like the forgot password feature and the implementation of reviews and ratings, are still in development, the core functionality is fully operational and functions seamlessly.",
-    bg: "/media/bella-hero.mp4",
     links: [
-      { link: "Github", href: "https://github.com/saddagada1/bella-t3" },
-      { link: "Live Website", href: "https://bella.saivamsi.ca" },
+      {
+        link: "Source",
+        type: "Github",
+        href: "https://github.com/saddagada1/bella-t3",
+      },
+      { link: "Demo", type: "Web", href: "https://bella.saivamsi.ca" },
     ],
     glyph: [
       14, 15, 27, 39, 40, 41, 42, 43, 44, 45, 57, 68, 80, 91, 103, 102, 101,
@@ -45,8 +51,12 @@ export const projects = [
     summary:
       "A growing collection of video games created using JavaScript, WebGL, or Unreal Engine. Currently only includes the classic game Tetris but you can look forward to an exciting Pokemon-inspired game which is currently under development. This is a passion project to demonstrate the creative potential of web-based gaming and gain a thorough understanding of game engine mechanics.",
     links: [
-      { link: "Github", href: "https://github.com/saddagada1/arcade" },
-      { link: "Live Website", href: "https://arcade.saivamsi.ca" },
+      {
+        link: "Source",
+        type: "Github",
+        href: "https://github.com/saddagada1/arcade",
+      },
+      { link: "Demo", type: "Web", href: "https://arcade.saivamsi.ca" },
     ],
     glyph: [
       26, 38, 50, 62, 98, 99, 111, 110, 40, 28, 29, 30, 66, 78, 77, 76, 113,
@@ -62,14 +72,17 @@ export const projects = [
     links: [
       {
         link: "JWT",
+        type: "Github",
         href: "https://github.com/saddagada1/graphql-jwt-auth-boiler-plate",
       },
       {
         link: "JWT for Mobile",
+        type: "Github",
         href: "https://github.com/saddagada1/graphql-jwt-auth-boiler-plate-mobile",
       },
       {
         link: "Session",
+        type: "Github",
         href: "https://github.com/saddagada1/graphql-session-auth-boiler-plate",
       },
     ],

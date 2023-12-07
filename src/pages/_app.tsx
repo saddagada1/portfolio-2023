@@ -39,10 +39,12 @@ const mono = JetBrains_Mono({
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
-      <style
-        jsx
-        global
-      >{`:root {--font-sans: ${sans.style.fontFamily}; --font-mono: ${mono.style.fontFamily}}}`}</style>
+      <style jsx global>{`
+        :root {
+          --font-sans: ${sans.style.fontFamily};
+          --font-mono: ${mono.style.fontFamily};
+        }
+      `}</style>
       <Theme attribute="class" defaultTheme="dark">
         <Layout>
           <Component {...pageProps} />
