@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
-import { skills, stack } from "~/lib/constants";
+import { skills } from "~/lib/constants";
 import { cn } from "~/lib/utils";
 
 const About: NextPage = ({}) => {
@@ -14,73 +14,57 @@ const About: NextPage = ({}) => {
         <title>Saivamsi Addagada | About</title>
       </Head>
       <main className="flex flex-1 flex-col hr:flex-row">
-        <div className="flex flex-1 flex-col">
-          <div className="relative aspect-square w-full flex-1 border-b hr:aspect-auto">
-            <Image
-              unoptimized
-              priority
-              src="/media/self.JPG"
-              alt="Me"
-              fill
-              className="object-cover object-top grayscale"
-            />
-          </div>
-          <div className="flex flex-col border-b p-2">
-            <h1 className="section-label mb-10">Summary</h1>
-            <p className="p">
-              I&apos;m a 25-year-old developer proficient in both Typescript and
-              Javascript, with my home base in Toronto, ON. My background
-              includes over two years of hands-on experience in developing
-              full-stack applications and projects. I&apos;m well-versed in
-              popular technologies like NextJS, NodeJS, MySQL, AWS, and more.
-              While I briefly pursued a computer science major at university, I
-              am primarily self taught. I&apos;ve acquired the bulk of my
-              knowledge through online courses and tutorials, constantly pushing
-              my boundaries by tackling progressively more complex&nbsp;
-              <Link href="/projects" className="underline">
-                projects
-              </Link>
-              . My current aspirations revolve around developing my skills and
-              gaining professional experience, with the aim of branching out
-              into other domains of programming and software development. As for
-              what lies beyond that, the future remains open.
-            </p>
-          </div>
+        <div className="relative aspect-square w-full flex-1 hr:aspect-auto">
+          <Image
+            priority
+            src="/media/self.JPG"
+            alt="Me"
+            fill
+            className="object-cover object-top grayscale"
+          />
         </div>
-        <div className="flex flex-1 flex-col border-l">
+        <div className="flex flex-1 flex-col hr:border-l">
           <h1 className="h1 hidden whitespace-nowrap border-b p-2 uppercase hr:block">
             Me, My<span className="text-destructive">self</span> & I
           </h1>
-          <div className="flex flex-1 flex-col border-b hr:flex-row">
-            <div className="flex-1 p-2">
+          <div className="flex flex-1 flex-col border-b">
+            <div className="flex flex-1 flex-col border-b p-2">
+              <h1 className="section-label mb-10">Summary</h1>
+              <p className="p">
+                I&apos;m a 25-year-old developer proficient in Java, Javascript
+                and Python, based out of Toronto, ON. My background includes
+                over 3 years of hands-on experience building full-stack
+                applications and projects. I&apos;m well-versed in popular
+                technologies like Spring Boot, NextJS, NodeJS, MySQL, AWS, and
+                more. While I briefly pursued a computer science major at
+                university, I am primarily self taught. I&apos;ve acquired the
+                bulk of my knowledge through online courses and tutorials,
+                constantly pushing my boundaries by tackling progressively more
+                complex&nbsp;
+                <Link href="/projects" className="underline">
+                  projects
+                </Link>
+                . My current aspirations revolve around developing my skills and
+                gaining professional experience, with the aim of branching out
+                into other domains of programming and software development. As
+                for what lies beyond that, the future remains open.
+              </p>
+            </div>
+            <div className="p-2">
               <h1 className="section-label mb-10">Skills</h1>
               {skills.map((section, index) => (
                 <div
                   key={index}
-                  className={cn("grid grid-cols-2", index !== 0 && "mt-2")}
+                  className={cn("p-sm grid grid-cols-2", index !== 0 && "mt-2")}
                 >
                   <p className="text-destructive">{section.experience}&nbsp;</p>
-                  <ul>
+                  <p>
                     {section.skills.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <span key={i}>
+                        {i === section.skills.length - 1 ? item : `${item}, `}
+                      </span>
                     ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            <div className="flex-1 border-t p-2 hr:border-l hr:border-t-0">
-              <h1 className="section-label mb-10">Stack</h1>
-              {stack.map((area, index) => (
-                <div
-                  key={index}
-                  className={cn("grid grid-cols-2", index !== 0 && "mt-2")}
-                >
-                  <p className="text-destructive">{area.name}&nbsp;</p>
-                  <ul>
-                    {area.stack.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
+                  </p>
                 </div>
               ))}
             </div>

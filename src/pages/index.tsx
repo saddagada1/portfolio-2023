@@ -21,7 +21,7 @@ const Index = () => {
       <Head>
         <title>Saivamsi Addagada</title>
       </Head>
-      <main className="flex h-full flex-1 flex-col overflow-hidden">
+      <main className="flex flex-1 flex-col overflow-hidden">
         <div className="flex flex-1 flex-col hr:flex-row">
           <div className="relative flex-1 border-b hr:border-b-0 hr:border-r">
             <Orbs

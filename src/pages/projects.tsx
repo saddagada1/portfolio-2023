@@ -16,11 +16,11 @@ const Projects: NextPage = ({}) => {
         <title>Saivamsi Addagada - Projects</title>
       </Head>
       <main className="flex flex-1 flex-col">
-        <div className="flex items-center border-b">
-          <h1 className="h1 flex-1 p-2 uppercase">
+        <div className="flex flex-col items-center border-b hr:flex-row">
+          <h1 className="h1 w-full flex-1 p-2 uppercase">
             <span className="text-destructive">Pro</span>jects
           </h1>
-          <div className="flex h-full flex-col hr:flex-1 hr:flex-row">
+          <div className="flex h-14 w-full flex-1 hr:h-full">
             <Button
               onClick={() => {
                 if (!project) return;
@@ -32,7 +32,7 @@ const Projects: NextPage = ({}) => {
               }}
               variant="outline"
               size="nav"
-              className="border-r-0 border-t-0 hr:border-b-0 hr:border-r"
+              className="border-b-0 border-l-0 hr:border-l hr:border-t-0"
             >
               <p className="section-label">Previous</p>
               <MoveLeft strokeWidth={0.5} className="icon" />
@@ -48,7 +48,7 @@ const Projects: NextPage = ({}) => {
               }}
               variant="outline"
               size="nav"
-              className="border-y-0 border-r-0 hr:border-0"
+              className="border-x-0 border-b-0 hr:border-0"
             >
               <p className="section-label">Next</p>
               <MoveRight strokeWidth={0.5} className="icon" />

@@ -129,24 +129,27 @@ export const experience = [
 ];
 
 export const skills = [
-  { experience: "4 Years", skills: ["HTML5", "CSS3"] },
   {
-    experience: "3 Years",
-    skills: ["Javascript", "NodeJS", "React", "REST API's"],
+    experience: "Languages",
+    skills: ["Java", "Javascript", "Typescript", "Python"],
   },
   {
-    experience: "2 Years",
-    skills: [
-      "Typescript",
-      "SEO",
-      "SQL",
-      "Redis",
-      "GraphQL API's",
-      "Authentication",
-    ],
+    experience: "Frameworks",
+    skills: ["Spring Boot", "NodeJS", "React", "NextJS", "React Native"],
   },
-  { experience: "1 Year", skills: ["tRPC", "AWS", "Serverless"] },
-  { experience: "Under a Year", skills: ["WebGL", "ThreeJS"] },
+  {
+    experience: "Databases",
+    skills: ["PostgreSQL", "MySQL", "MongoDB", "Redis"],
+  },
+  { experience: "Architecture", skills: ["REST", "GraphQL", "tRPC"] },
+  {
+    experience: "Services",
+    skills: ["AWS", "Google Cloud Platform", "Vercel"],
+  },
+  {
+    experience: "Miscellaneous",
+    skills: ["Git", "Unit Testing", "SEO", "Prisma", "Tailwind"],
+  },
 ];
 
 export const stack = [

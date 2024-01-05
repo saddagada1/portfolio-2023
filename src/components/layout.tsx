@@ -19,13 +19,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Head>
         <meta
           name="description"
-          content="Saivamsi Addagada's Portfolio - 2@23"
+          content="Saivamsi Addagada's Portfolio - 2@24"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex h-screen w-screen flex-col font-sans">
         <nav className="flex items-center border-b pl-2">
-          <h1 className="section-label">Portfolio &apos;23</h1>
+          <h1 className="section-label">Portfolio &apos;24</h1>
           <Button
             className={cn(
               "border-y-0",
@@ -64,7 +64,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             }
             variant="outline"
             size="icon"
-            className="flex-none border-y-0 border-l-0"
+            className="flex-none border-x-0 border-y-0"
           >
             <SunMoon strokeWidth={1} />
           </Button>

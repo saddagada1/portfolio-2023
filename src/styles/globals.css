@@ -76,6 +76,9 @@
 }
 
 @layer components {
+  .p-sm {
+    @apply sm:text-lg hr:text-xl;
+  }
   .p {
     @apply sm:text-xl hr:text-2xl;
   }
