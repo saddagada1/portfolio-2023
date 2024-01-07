@@ -27,7 +27,7 @@ const Index = () => {
             <Orbs
               identifier="index-orbs"
               bounds={100}
-              size="w-full hr:w-1/2"
+              size="w-full h-full hr:w-1/2 hr:h-1/2"
               className="h-full"
               blur="backdrop-blur-3xl"
               grain

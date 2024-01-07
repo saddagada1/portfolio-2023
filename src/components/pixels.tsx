@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { cn } from "~/lib/utils";
 import { darkForeground, foreground } from "~/lib/constants";
 import { useTheme } from "next-themes";
+import { useElementSize } from "usehooks-ts";
 
 interface PixelsProps {
   glyph?: number[];
@@ -13,6 +14,7 @@ const Pixels: React.FC<PixelsProps> = ({ glyph }) => {
   const cols = 12;
   const rows = 12;
   const [current, setCurrent] = useState<number[] | undefined>(glyph);
+  const [container, { height }] = useElementSize();
 
   useEffect(() => {
     if (!glyph || !current) return;
@@ -42,13 +44,17 @@ const Pixels: React.FC<PixelsProps> = ({ glyph }) => {
     };
   }, [current, glyph, theme]);
 
+  console.log(height);
+
   return (
     <div
+      ref={container}
       style={{
+        width: height,
         gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
         gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
       }}
-      className="grid aspect-square h-full"
+      className="grid h-full"
     >
       {Array.from({ length: cols * rows }).map((_, index) => (
         <span

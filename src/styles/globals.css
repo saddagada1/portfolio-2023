@@ -77,10 +77,10 @@
 
 @layer components {
   .p-sm {
-    @apply sm:text-lg hr:text-xl;
+    @apply hr:text-lg;
   }
   .p {
-    @apply sm:text-xl hr:text-2xl;
+    @apply sm:text-lg hr:text-xl;
   }
   .p-lg {
     @apply sm:text-xl hr:text-3xl;

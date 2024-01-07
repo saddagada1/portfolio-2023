@@ -13,7 +13,7 @@ const About: NextPage = ({}) => {
       <Head>
         <title>Saivamsi Addagada | About</title>
       </Head>
-      <main className="flex flex-1 flex-col hr:flex-row">
+      <main className="flex flex-1 flex-col overflow-hidden hr:flex-row">
         <div className="relative aspect-square w-full flex-1 hr:aspect-auto">
           <Image
             priority
