@@ -3,7 +3,6 @@ import Layout from "~/components/layout";
 import { Theme } from "~/components/theme";
 import "~/styles/globals.css";
 import localFont from "next/font/local";
-import { JetBrains_Mono } from "next/font/google";
 
 const sans = localFont({
   src: [
@@ -30,19 +29,12 @@ const sans = localFont({
   ],
 });
 
-const mono = JetBrains_Mono({
-  weight: "variable",
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
-
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
       <style jsx global>{`
         :root {
           --font-sans: ${sans.style.fontFamily};
-          --font-mono: ${mono.style.fontFamily};
         }
       `}</style>
       <Theme attribute="class" defaultTheme="dark">

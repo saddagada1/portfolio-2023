@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 45 29% 97%;
     --foreground: 0 0% 3.9%;
 
     --card: 0 0% 100%;
@@ -71,43 +71,40 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply overflow-x-hidden bg-gradient-to-br from-background via-background/50 to-background text-foreground;
   }
 }
 
 @layer components {
-  .p-sm {
-    @apply hr:text-lg;
-  }
   .p {
-    @apply sm:text-lg hr:text-xl;
+    @apply p-4 md:p-6 xl:p-8;
   }
-  .p-lg {
-    @apply sm:text-xl hr:text-3xl;
+  .space {
+    @apply mt-[10vh] xl:mt-[20vh];
   }
-  .h1 {
-    @apply text-[12vw] font-medium leading-[10vw] hr:text-[8vw] hr:leading-[7vw];
+  .gap {
+    @apply gap-4 md:gap-6 xl:gap-8;
   }
-  .h2 {
-    @apply mb-8 text-[10vw] font-medium leading-[8vw] hr:text-[6vw] hr:leading-[5vw];
+  .text {
+    @apply text-sm lg:text-lg;
+  }
+  .text-strong {
+    @apply text-sm font-medium lg:text-lg;
   }
   .icon {
     @apply absolute h-full w-1/2 translate-x-1/4 translate-y-1/4;
-  }
-  .section-label {
-    @apply w-full flex-1 font-mono text-xs font-medium uppercase tracking-tight sm:text-sm hr:text-base;
   }
 }
 
 * {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* -ms-overflow-style: none;
+  scrollbar-width: none; */
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
-}
+} */
 
 *::selection {
   background-color: hsl(var(--foreground));
@@ -167,20 +164,5 @@
   }
   100% {
     transform: translate(-15%, -20%);
-  }
-}
-
-.marquee {
-  width: fit-content;
-  white-space: nowrap;
-  animation: marquee 5s linear infinite;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-25%);
   }
 }
