@@ -3,18 +3,19 @@ import { Button } from "./ui/button";
 import { SunMoon } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useRouter } from "next/router";
 import gsap from "gsap";
 import { cn } from "~/lib/utils";
 
 const Navbar: React.FC = () => {
   const { theme, setTheme } = useTheme();
+  const [animComplete, setAnimComplete] = useState(false);
   const router = useRouter();
 
   useLayoutEffect(() => {
-    if (router.pathname !== "/") return;
-    const navbarCtx = gsap.context(() => {
+    if (router.pathname !== "/" || animComplete) return;
+    gsap.context(() => {
       const navbarTimeline = gsap.timeline();
 
       navbarTimeline.fromTo(
@@ -25,11 +26,12 @@ const Navbar: React.FC = () => {
           ease: "power4.inOut",
           duration: 1,
           delay: 2,
+          onComplete: () => {
+            setAnimComplete(true);
+          },
         },
       );
     });
-
-    return () => navbarCtx.revert();
   });
   return (
     <nav

@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   useLayoutEffect(() => {
-    const indexCtx = gsap.context(() => {
+    gsap.context(() => {
       const heroTimeline = gsap.timeline();
 
       heroTimeline
@@ -219,15 +219,11 @@ const Index = () => {
           ease: "power4.inOut",
           duration: 1,
           stagger: {
-            from: "random",
-            each: 0.5,
-            grid: [2, 2],
+            each: 0.1,
           },
         },
       );
     });
-
-    return () => indexCtx.revert();
   });
   return (
     <>
@@ -294,7 +290,7 @@ const Index = () => {
               <div className="p gap relative flex flex-1 flex-col border">
                 <div className="relative aspect-video">
                   <Image
-                    src="/media/remaster/2.png"
+                    src="/media/remaster/2.webp"
                     alt="remaster"
                     fill
                     className="object-cover"
@@ -302,7 +298,7 @@ const Index = () => {
                 </div>
                 <div className="relative aspect-video">
                   <Image
-                    src="/media/remaster/1.png"
+                    src="/media/remaster/1.webp"
                     alt="remaster"
                     fill
                     className="object-cover object-top"
@@ -313,7 +309,7 @@ const Index = () => {
                 <div className="p border border-t-0 lg:border-l-0 lg:border-t">
                   <div className="relative aspect-video w-full">
                     <Image
-                      src="/media/remaster/4.png"
+                      src="/media/remaster/4.webp"
                       alt="remaster"
                       fill
                       className="object-cover"
@@ -323,7 +319,7 @@ const Index = () => {
                 <div className="p gap flex border border-t-0 lg:border-l-0">
                   <div className="relative aspect-video w-3/4">
                     <Image
-                      src="/media/remaster/3.png"
+                      src="/media/remaster/3.webp"
                       alt="remaster"
                       fill
                       className="object-cover"
@@ -331,7 +327,7 @@ const Index = () => {
                   </div>
                   <div className="relative aspect-video w-1/4">
                     <Image
-                      src="/media/remaster/mobile-1.png"
+                      src="/media/remaster/mobile-1.webp"
                       alt="remaster"
                       fill
                       className="object-cover object-top"
@@ -354,7 +350,7 @@ const Index = () => {
               <div className="p gap flex border">
                 <div className="relative aspect-video w-3/4 border">
                   <Image
-                    src="/media/bella/1.png"
+                    src="/media/bella/1.webp"
                     alt="bella"
                     fill
                     className="object-cover"
@@ -362,7 +358,7 @@ const Index = () => {
                 </div>
                 <div className="relative aspect-video w-1/4 border">
                   <Image
-                    src="/media/bella/mobile-1.png"
+                    src="/media/bella/mobile-1.webp"
                     alt="bella"
                     fill
                     className="object-cover object-top"
@@ -372,7 +368,7 @@ const Index = () => {
               <div className="p gap flex flex-col border border-t-0 lg:flex-row">
                 <div className="relative aspect-video flex-1 border">
                   <Image
-                    src="/media/bella/2.png"
+                    src="/media/bella/2.webp"
                     alt="bella"
                     fill
                     className="object-cover"
@@ -380,7 +376,7 @@ const Index = () => {
                 </div>
                 <div className="relative aspect-video flex-1 border">
                   <Image
-                    src="/media/bella/3.png"
+                    src="/media/bella/3.webp"
                     alt="bella"
                     fill
                     className="object-cover"
@@ -388,7 +384,7 @@ const Index = () => {
                 </div>
                 <div className="relative aspect-video flex-1 border">
                   <Image
-                    src="/media/bella/4.png"
+                    src="/media/bella/4.webp"
                     alt="bella"
                     fill
                     className="object-cover"

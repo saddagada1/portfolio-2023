@@ -7,10 +7,10 @@
     --background: 45 29% 97%;
     --foreground: 0 0% 3.9%;
 
-    --card: 0 0% 100%;
+    --card: 45 29% 97%;
     --card-foreground: 0 0% 3.9%;
 
-    --popover: 0 0% 100%;
+    --popover: 45 29% 97%;
     --popover-foreground: 0 0% 3.9%;
 
     --primary: 0 0% 9%;
@@ -37,28 +37,28 @@
 
   .dark {
     --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --foreground: 45 29% 97%;
 
     --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card-foreground: 45 29% 97%;
 
     --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: 45 29% 97%;
 
-    --primary: 0 0% 98%;
+    --primary: 45 29% 97%;
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: 45 29% 97%;
 
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
 
     --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 45 29% 97%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 45 29% 97%;
 
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
@@ -112,60 +112,4 @@
 *::selection {
   background-color: hsl(var(--foreground));
   color: hsl(var(--background));
-}
-
-.grain {
-  background-image: url("../../public/media/noise.png");
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.anim-grain {
-  background-image: url("../../public/media/noise.png");
-  height: 300%;
-  width: 300%;
-  position: absolute;
-  pointer-events: none;
-  animation: grain 4s steps(5) infinite;
-}
-
-@keyframes grain {
-  0%,
-  100% {
-    transform: translate(-15%, -20%);
-  }
-  10% {
-    transform: translate(-5%, -10%);
-  }
-  20% {
-    transform: translate(-15%, -20%);
-  }
-  30% {
-    transform: translate(-5%, -10%);
-  }
-  40% {
-    transform: translate(-15%, -20%);
-  }
-  50% {
-    transform: translate(-5%, -10%);
-  }
-  60% {
-    transform: translate(-15%, -20%);
-  }
-  70% {
-    transform: translate(-5%, -10%);
-  }
-  80% {
-    transform: translate(-15%, -20%);
-  }
-  90% {
-    transform: translate(-5%, -10%);
-  }
-  100% {
-    transform: translate(-15%, -20%);
-  }
 }

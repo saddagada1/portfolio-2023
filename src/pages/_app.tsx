@@ -3,6 +3,7 @@ import Layout from "~/components/layout";
 import { Theme } from "~/components/theme";
 import "~/styles/globals.css";
 import localFont from "next/font/local";
+import { Toaster } from "~/components/ui/sonner";
 
 const sans = localFont({
   src: [
@@ -38,6 +39,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         }
       `}</style>
       <Theme attribute="class" defaultTheme="dark">
+        <Toaster
+          position="top-left"
+          richColors
+          toastOptions={{ className: "text" }}
+        />
         <Layout>
           <Component {...pageProps} />
         </Layout>

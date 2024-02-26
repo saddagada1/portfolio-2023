@@ -13,8 +13,9 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button, ButtonLoading } from "./ui/button";
-import { HTMLAttributes } from "react";
+import { type HTMLAttributes } from "react";
 import { cn } from "~/lib/utils";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid Email" }),
@@ -36,8 +37,25 @@ const ContactForm: React.FC<HTMLAttributes<HTMLFormElement>> = ({
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    return;
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: values.email,
+          message: values.message,
+        }),
+      });
+      if (response.status !== 200) {
+        throw new Error("Something went wrong");
+      }
+      toast.success(`Thank you. You'll hear from me soon.`);
+    } catch (error) {
+      toast.error(`Something went wrong. Please try again.`);
+    }
   };
 
   return (
