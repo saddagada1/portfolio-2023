@@ -1,3 +1,73 @@
+export const projects = [
+  {
+    id: 1,
+    name: "Remaster",
+    stack: [
+      "Java",
+      "Spring Boot",
+      "Typescript",
+      "NextJS",
+      "PostgreSQL",
+      "Redis",
+      "S3",
+      "EC2",
+      "Docker",
+    ],
+    links: [{ name: "Live", href: "https://remaster.saivamsi.ca" }],
+  },
+  {
+    id: 2,
+    name: "Bella",
+    stack: [
+      "tRPC",
+      "Typescript",
+      "NextJS",
+      "PostgreSQL",
+      "Redis",
+      "S3",
+      "Vercel",
+    ],
+    links: [{ name: "Live", href: "https://bella.saivamsi.ca" }],
+  },
+  {
+    id: 3,
+    name: "Arcade",
+    stack: ["tRPC", "Typescript", "NextJS", "PostgreSQL", "Vercel"],
+    links: [{ name: "Live", href: "https://arcade.saivamsi.ca" }],
+  },
+  {
+    id: 4,
+    name: "Monk",
+    stack: ["Swift", "SwiftUI", "AudioKit", "iOS"],
+    links: [{ name: "Source", href: "https://github.com/saddagada1/monk" }],
+  },
+  {
+    id: 5,
+    name: "Tether",
+    stack: [
+      "Java",
+      "Spring Boot",
+      "Typescript",
+      "NextJS",
+      "PostgreSQL",
+      "Redis",
+      "S3",
+      "EC2",
+      "Docker",
+    ],
+    links: [
+      {
+        name: "Client Source",
+        href: "https://github.com/saddagada1/tether-client",
+      },
+      {
+        name: "Server Source",
+        href: "https://github.com/saddagada1/tether-server",
+      },
+    ],
+  },
+];
+
 export const essentials = [
   "https://www.youtube.com/watch?v=DYHng61lftA&ab_channel=CarreroQuirogaDanielAlejandro",
   "https://www.youtube.com/watch?v=6TWdLqER014&ab_channel=WalterCalloni",

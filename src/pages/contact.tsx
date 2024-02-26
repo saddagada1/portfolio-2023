@@ -8,7 +8,9 @@ const Contact: NextPage = ({}) => {
       <Head>
         <title>Saivamsi Addagada | Contact</title>
       </Head>
-      <ContactSection />
+      <main className="flex flex-1 pt-20">
+        <ContactSection className="w-full" />
+      </main>
     </>
   );
 };

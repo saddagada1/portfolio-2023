@@ -3,17 +3,48 @@ import { Button } from "./ui/button";
 import { SunMoon } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { useLayoutEffect } from "react";
+import { useRouter } from "next/router";
+import gsap from "gsap";
+import { cn } from "~/lib/utils";
 
 const Navbar: React.FC = () => {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
+
+  useLayoutEffect(() => {
+    if (router.pathname !== "/") return;
+    const navbarCtx = gsap.context(() => {
+      const navbarTimeline = gsap.timeline();
+
+      navbarTimeline.fromTo(
+        `.navbar`,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          ease: "power4.inOut",
+          duration: 1,
+          delay: 2,
+        },
+      );
+    });
+
+    return () => navbarCtx.revert();
+  });
   return (
-    <nav className="p fixed top-0 z-50 flex h-20 w-full items-center justify-between border-b backdrop-blur">
-      <Button variant="link" asChild>
+    <nav
+      className={cn(
+        "navbar p fixed top-0 z-50 flex h-20 w-full items-center justify-between border-b backdrop-blur",
+        router.pathname === "/" && "opacity-0",
+      )}
+    >
+      <Button variant="link" asChild className="pl-0">
         <Link className="text-strong" href="/">
-          Portfolio &apos;24 - Saivamsi Addagada
+          Portfolio &apos;24
+          <span className="hidden md:inline"> - Saivamsi Addagada</span>
         </Link>
       </Button>
-      <div className="hidden md:flex">
+      <div className="flex">
         <Button variant="link" asChild>
           <Link className="text-strong" href="/projects">
             Projects
@@ -33,14 +64,12 @@ const Navbar: React.FC = () => {
           onClick={() =>
             theme === "dark" ? setTheme("light") : setTheme("dark")
           }
+          className="pr-0"
           variant="link"
         >
           <SunMoon />
         </Button>
       </div>
-      <Button variant="link" className="md:hidden">
-        Menu
-      </Button>
     </nav>
   );
 };
@@ -48,8 +77,10 @@ const Navbar: React.FC = () => {
 const Footer: React.FC = () => {
   const { theme, setTheme } = useTheme();
   return (
-    <footer className="p space flex items-center justify-between border-t">
-      <h1 className="text-strong">Saivamsi Addagada - &copy;2024</h1>
+    <footer className="p flex items-center justify-between border-t">
+      <h1 className="text-strong">
+        <span className="hidden md:inline">Saivamsi Addagada - </span>&copy;2024
+      </h1>
       <div className="flex">
         <Button variant="link" asChild>
           <Link className="text-strong" href="/projects">
@@ -71,6 +102,7 @@ const Footer: React.FC = () => {
             theme === "dark" ? setTheme("light") : setTheme("dark")
           }
           variant="link"
+          className="pr-0"
         >
           <SunMoon />
         </Button>
@@ -84,6 +116,9 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Head>
@@ -93,7 +128,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen w-screen font-sans">
+      <div className="flex min-h-screen w-screen flex-col font-sans">
         <Navbar />
         {children}
         <Footer />

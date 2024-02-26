@@ -11,10 +11,10 @@ const Orbs: React.FC<HTMLAttributes<HTMLDivElement>> = ({
   const gridSize = 12;
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const timeline = gsap.timeline();
+    gsap.context(() => {
+      const orbsTimeline = gsap.timeline();
 
-      timeline.to(`.orb`, {
+      orbsTimeline.to(`.orb`, {
         x: `random(${-width / 2}, ${width / 2}, 1)`,
         y: `random(${-height / 4}, ${height / 4}, 1)`,
         opacity: `random(0, 1, 0.1)`,
@@ -24,8 +24,6 @@ const Orbs: React.FC<HTMLAttributes<HTMLDivElement>> = ({
         repeatRefresh: true,
       });
     });
-
-    return () => ctx.revert();
   });
 
   return (
@@ -33,7 +31,7 @@ const Orbs: React.FC<HTMLAttributes<HTMLDivElement>> = ({
       {...props}
       ref={container}
       className={cn(
-        "relative flex h-full w-full items-center justify-center",
+        "relative flex h-full w-full items-center justify-center overflow-x-hidden",
         className,
       )}
     >
