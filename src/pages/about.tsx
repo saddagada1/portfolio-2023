@@ -15,7 +15,7 @@ const About: NextPage = ({}) => {
         <div className="gap flex flex-col lg:flex-row">
           <div className="relative h-[600px] w-full saturate-50 lg:w-1/3">
             <Image
-              src="/media/self.jpg"
+              src="/media/self.JPG"
               alt="moi"
               fill
               className="border object-cover object-top"
