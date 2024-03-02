@@ -18,12 +18,11 @@ module.exports = {
     extend: {
       screens: {
         hr: {
-          raw: "(min-width: 1024px) and (min-aspect-ratio: 5/3)",
+          raw: "(min-width: 1024px) and (min-aspect-ratio: 4/3)",
         },
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
-        mono: ["var(--font-mono)"],
       },
       colors: {
         border: "hsl(var(--border))",
